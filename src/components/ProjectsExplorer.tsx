@@ -46,7 +46,7 @@ export default function ProjectsExplorer() {
               type="button"
               aria-pressed={isActive}
               onClick={() => setActive(f.key)}
-              className={`cursor-pointer rounded-full border px-4 py-2 text-sm transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper ${
+              className={`min-h-11 cursor-pointer rounded-full border px-4 py-2 text-sm transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper ${
                 isActive
                   ? "border-ink bg-ink text-paper"
                   : "border-hairline bg-paper-raised text-ink-soft hover:border-accent/60 hover:text-accent-ink"
