@@ -14,7 +14,7 @@ export default function Terminal() {
   return (
     <div
       aria-label="一个 AI Agent 流水线的会话演示"
-      className="overflow-hidden rounded-xl border border-terminal-edge bg-terminal font-mono text-[0.8rem] leading-7 text-terminal-text shadow-[0_16px_40px_-16px_rgba(12,20,24,0.45)]"
+      className="overflow-hidden rounded-xl border border-terminal-edge bg-terminal font-mono text-[0.8rem] leading-7 text-terminal-text shadow-[0_24px_70px_-24px_rgba(122,162,247,0.35)]"
     >
       <div className="flex items-center gap-1.5 border-b border-terminal-edge px-4 py-2.5">
         <span className="h-2.5 w-2.5 rounded-full bg-terminal-edge" />
@@ -27,7 +27,7 @@ export default function Terminal() {
       <div className="px-5 py-4">
         <p className="term-line" style={line()}>
           <span className="text-terminal-dim">$</span>{" "}
-          <span className="text-[#8ab4ff]">claude</span>{" "}
+          <span className="text-purple">claude</span>{" "}
           <span className="text-signal">&quot;把一个想法，变成能交付的东西&quot;</span>
         </p>
         <p className="term-line text-terminal-dim" style={line()}>

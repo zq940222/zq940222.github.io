@@ -21,6 +21,7 @@ function SectionHead({
       <h2 className="font-display text-xl font-semibold tracking-tight">
         {zh}
         <span className="ml-2.5 font-mono text-xs font-normal text-ink-faint">
+          <span className="text-signal">{"// "}</span>
           {en}
         </span>
       </h2>
@@ -46,12 +47,16 @@ export default function Home() {
       <section className="grid items-center gap-10 py-14 sm:py-20 lg:grid-cols-[1.05fr_1fr] lg:gap-14">
         <div>
           <p className="font-mono text-xs tracking-widest text-accent">
+            <span className="text-signal">{"// "}</span>
             SOFTWARE ENGINEER · AI AGENT TOOLING
           </p>
           <h1 className="mt-5 font-display text-4xl font-bold leading-[1.15] tracking-tight sm:text-[2.75rem]">
             把 AI Agent 变成
             <br />
-            真正能交付的工具
+            <span className="bg-gradient-to-r from-accent via-cyan to-purple bg-clip-text text-transparent">
+              真正能交付
+            </span>
+            的工具
           </h1>
           <p className="mt-3 font-mono text-sm text-ink-faint">
             Turning AI agents into tools that actually ship.
@@ -64,7 +69,7 @@ export default function Home() {
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <Link
               href="/posts/"
-              className="rounded-md bg-ink px-5 py-2.5 text-sm font-medium text-paper transition-colors hover:bg-accent-ink"
+              className="rounded-md bg-accent px-5 py-2.5 text-sm font-medium text-paper shadow-[0_8px_28px_-10px_rgba(122,162,247,0.55)] transition-colors hover:bg-accent-ink"
             >
               读文章
             </Link>

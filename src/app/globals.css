@@ -2,24 +2,28 @@
 
 /* ————————————————————————————————
    设计令牌 / Design tokens
-   雾白纸面 · 墨青文字 · 群青强调 · 终端墨匣
+   深色开发者主题（Tokyo Night 系）
+   paper=深空底 · ink=星光文字 · accent=群青蓝
+   syntax: 蓝 #7aa2f7 / 青 #7dcfff / 紫 #bb9af7 / 绿 #9ece6a / 琥珀 #e0af68
 ——————————————————————————————— */
 :root {
-  --paper: #f2f4f3;
-  --paper-raised: #fafbfa;
-  --ink: #101b21;
-  --ink-soft: #51626b;
-  --ink-faint: #64727a; /* 小字信息文本，对纸面底色保持 ≥4.5:1 对比度 */
-  --accent: #2743e3;
-  --accent-ink: #1d33b8;
-  --accent-wash: #e4e9fc;
-  --hairline: #d9dfdd;
-  --terminal: #0c1418;
-  --terminal-edge: #24333a;
-  --terminal-text: #c7d4d9;
-  --terminal-dim: #5f7078;
-  --signal: #62d99c;
-  --amber: #e0b356;
+  --paper: #121320;
+  --paper-raised: #181a2a;
+  --ink: #c8d3f2;
+  --ink-soft: #98a3c7;
+  --ink-faint: #7b86ad; /* 小字信息文本，对深空底保持 ≥4.5:1 对比度 */
+  --accent: #7aa2f7;
+  --accent-ink: #a3c0ff;
+  --accent-wash: rgba(122, 162, 247, 0.13);
+  --hairline: #272a3d;
+  --terminal: #1a1c2e;
+  --terminal-edge: #2e3250;
+  --terminal-text: #a9b4d8;
+  --terminal-dim: #6f7aa6;
+  --signal: #9ece6a;
+  --amber: #e0af68;
+  --purple: #bb9af7;
+  --cyan: #7dcfff;
 }
 
 @theme inline {
@@ -38,8 +42,10 @@
   --color-terminal-dim: var(--terminal-dim);
   --color-signal: var(--signal);
   --color-amber: var(--amber);
-  --font-display: "Space Grotesk Variable", "PingFang SC", "MiSans",
-    "Microsoft YaHei", sans-serif;
+  --color-purple: var(--purple);
+  --color-cyan: var(--cyan);
+  --font-display: "JetBrains Mono Variable", ui-monospace, "PingFang SC",
+    "MiSans", "Microsoft YaHei", monospace;
   --font-body: ui-sans-serif, system-ui, -apple-system, "PingFang SC", "MiSans",
     "Microsoft YaHei", "Noto Sans SC", sans-serif;
   --font-mono: "JetBrains Mono Variable", ui-monospace, "SFMono-Regular",
@@ -51,16 +57,34 @@ html {
 }
 
 body {
-  background: var(--paper);
+  /* 深空底 + 极光光晕 + 细点阵网格，三层叠加 */
+  background:
+    radial-gradient(
+      1100px 560px at 82% -8%,
+      rgba(122, 162, 247, 0.11),
+      transparent 62%
+    ),
+    radial-gradient(
+      900px 520px at 6% 4%,
+      rgba(187, 154, 247, 0.08),
+      transparent 60%
+    ),
+    radial-gradient(
+      700px 460px at 50% 108%,
+      rgba(125, 207, 255, 0.06),
+      transparent 60%
+    ),
+    radial-gradient(rgba(200, 211, 242, 0.028) 1px, transparent 1px) 0 0 / 26px
+      26px,
+    var(--paper);
   color: var(--ink);
   font-family: var(--font-body);
-  font-feature-settings: "ss01";
   text-rendering: optimizeLegibility;
 }
 
 ::selection {
   background: var(--accent);
-  color: #fff;
+  color: var(--paper);
 }
 
 /* ————————————————————————————————
@@ -166,34 +190,48 @@ body {
 .prose h2 {
   font-family: var(--font-display);
   font-weight: 640;
-  font-size: 1.45rem;
+  font-size: 1.4rem;
   line-height: 1.4;
   margin-top: 2.4em;
   padding-top: 1.2em;
   border-top: 1px solid var(--hairline);
 }
 
+.prose h2::before {
+  content: "## ";
+  color: var(--accent);
+  font-weight: 500;
+}
+
 .prose h3 {
   font-family: var(--font-display);
   font-weight: 620;
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   margin-top: 2em;
+}
+
+.prose h3::before {
+  content: "### ";
+  color: var(--terminal-dim);
+  font-weight: 500;
 }
 
 .prose a {
   color: var(--accent-ink);
   text-decoration: underline;
-  text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent);
   text-underline-offset: 3px;
   transition: text-decoration-color 0.15s ease;
 }
 
 .prose a:hover {
-  text-decoration-color: var(--accent);
+  text-decoration-color: var(--cyan);
+  color: var(--cyan);
 }
 
 .prose strong {
   font-weight: 640;
+  color: #e2e9fb;
 }
 
 .prose ul,
@@ -231,11 +269,11 @@ body {
 .prose ol > li::marker {
   font-family: var(--font-mono);
   font-size: 0.9em;
-  color: var(--accent-ink);
+  color: var(--amber);
 }
 
 .prose blockquote {
-  border-left: 3px solid var(--accent);
+  border-left: 3px solid var(--purple);
   padding: 0.2em 0 0.2em 1.2em;
   color: var(--ink-soft);
 }
@@ -243,7 +281,8 @@ body {
 .prose code {
   font-family: var(--font-mono);
   font-size: 0.86em;
-  background: color-mix(in srgb, var(--ink) 7%, transparent);
+  color: var(--amber);
+  background: rgba(224, 175, 104, 0.09);
   border-radius: 4px;
   padding: 0.15em 0.4em;
 }
@@ -257,11 +296,13 @@ body {
   overflow-x: auto;
   font-size: 0.875rem;
   line-height: 1.75;
+  box-shadow: 0 12px 40px -18px rgba(122, 162, 247, 0.18);
 }
 
 .prose pre code {
   background: none;
   padding: 0;
+  color: inherit;
   font-size: inherit;
 }
 
@@ -278,10 +319,10 @@ body {
   font-family: var(--font-mono);
   font-size: 0.8em;
   text-align: left;
-  color: var(--ink-soft);
+  color: var(--accent);
   font-weight: 500;
   letter-spacing: 0.04em;
-  border-bottom: 1.5px solid var(--ink);
+  border-bottom: 1.5px solid var(--terminal-edge);
   padding: 0.5em 1em 0.5em 0;
 }
 
@@ -303,16 +344,16 @@ body {
   border: 1px solid var(--hairline);
 }
 
-/* 代码高亮 —— 与终端墨匣同一色系 */
+/* 代码高亮 —— Tokyo Night 语法色 */
 .hljs-comment,
 .hljs-quote {
-  color: var(--terminal-dim);
+  color: #565f89;
   font-style: italic;
 }
 .hljs-keyword,
 .hljs-selector-tag,
 .hljs-built_in {
-  color: #8ab4ff;
+  color: var(--purple);
 }
 .hljs-string,
 .hljs-attr,
@@ -327,12 +368,12 @@ body {
 .hljs-title,
 .hljs-function .hljs-title,
 .hljs-title.function_ {
-  color: #d7e3ff;
+  color: var(--accent);
 }
 .hljs-type,
 .hljs-class .hljs-title,
 .hljs-title.class_ {
-  color: #ffc9a3;
+  color: var(--cyan);
 }
 .hljs-variable,
 .hljs-params {

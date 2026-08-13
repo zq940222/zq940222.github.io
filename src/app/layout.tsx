@@ -1,5 +1,4 @@
-import type { Metadata } from "next";
-import "@fontsource-variable/space-grotesk";
+import type { Metadata, Viewport } from "next";
 import "@fontsource-variable/jetbrains-mono";
 import "./globals.css";
 import Nav from "@/components/Nav";
@@ -24,6 +23,10 @@ export const metadata: Metadata = {
     locale: "zh_CN",
     type: "website",
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#121320",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

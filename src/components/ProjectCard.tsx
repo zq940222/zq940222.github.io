@@ -19,7 +19,7 @@ export default function ProjectCard({
       target="_blank"
       rel="noopener noreferrer"
       style={animate ? ({ "--i": index } as CSSProperties) : undefined}
-      className={`group relative flex cursor-pointer flex-col overflow-hidden rounded-xl border border-hairline bg-paper-raised p-5 transition-all duration-200 ease-out hover:-translate-y-1 hover:border-accent/60 hover:shadow-[0_14px_36px_-14px_rgba(39,67,227,0.3)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper ${
+      className={`group relative flex cursor-pointer flex-col overflow-hidden rounded-xl border border-hairline bg-paper-raised p-5 transition-all duration-200 ease-out hover:-translate-y-1 hover:border-accent/60 hover:shadow-[0_18px_44px_-16px_rgba(122,162,247,0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper ${
         animate ? "card-in" : ""
       }`}
     >
