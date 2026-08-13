@@ -9,7 +9,7 @@
   --paper-raised: #fafbfa;
   --ink: #101b21;
   --ink-soft: #51626b;
-  --ink-faint: #8a979e;
+  --ink-faint: #64727a; /* 小字信息文本，对纸面底色保持 ≥4.5:1 对比度 */
   --accent: #2743e3;
   --accent-ink: #1d33b8;
   --accent-wash: #e4e9fc;
@@ -113,7 +113,27 @@ body {
   width: 0%;
 }
 
+/* 项目卡片入场级联 */
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.card-in {
+  animation: card-in 0.35s ease-out backwards;
+  animation-delay: calc(var(--i, 0) * 0.05s);
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .card-in {
+    animation: none;
+  }
   .term-line {
     animation: none;
     opacity: 1;
