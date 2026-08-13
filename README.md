@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# zq940222.github.io
 
-## Getting Started
+个人博客 / Personal blog — [zq940222.github.io](https://zq940222.github.io)
 
-First, run the development server:
+把 AI Agent 变成真正能交付的工具。记录 LLM 应用、agentic 系统与工程实践。
+
+## 技术栈
+
+- [Next.js](https://nextjs.org) (App Router, 静态导出) + TypeScript + Tailwind CSS v4
+- 文章为 `content/posts/` 下的 Markdown（gray-matter + remark/rehype 构建时渲染）
+- GitHub Actions 自动部署到 GitHub Pages
+
+## 本地开发
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 写文章
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+在 `content/posts/` 新建 `my-post.md`：
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```markdown
+---
+title: 中文标题
+titleEn: English Title
+date: "2026-08-13"
+tags: [标签A, 标签B]
+summary: 列表页显示的中文摘要。
+summaryEn: English summary.
+---
 
-## Learn More
+正文 Markdown……
+```
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+推送到 `main` 分支后自动构建发布。
