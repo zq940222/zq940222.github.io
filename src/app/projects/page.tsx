@@ -17,7 +17,8 @@ export default function ProjectsPage() {
         </span>
       </h1>
       <p className="mt-3 max-w-xl leading-relaxed text-ink-soft">
-        开源项目与业余作品：Agent 流水线、MCP 技能、桌面工具与游戏。 更多在{" "}
+        开源项目与业余作品：Agent 流水线、MCP
+        技能、桌面工具与游戏。以下均为个人项目，与任职公司无关。更多在{" "}
         <a
           href={site.github}
           target="_blank"

@@ -5,10 +5,12 @@ export default function ProjectCard({
   project,
   index = 0,
   animate = false,
+  showBadge = true,
 }: {
   project: Project;
   index?: number;
   animate?: boolean;
+  showBadge?: boolean;
 }) {
   const cat = categories[project.category];
   return (
@@ -30,7 +32,7 @@ export default function ProjectCard({
         <span className="transition-colors group-hover:text-accent">
           {cat.en}
         </span>
-        {project.featured && (
+        {showBadge && project.featured && (
           <span
             className="rounded-sm bg-accent-wash px-1.5 py-0.5 tracking-normal text-accent-ink"
             title="精选项目"

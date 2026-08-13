@@ -103,7 +103,7 @@ export default function Home() {
         />
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
           {featured.map((p) => (
-            <ProjectCard key={p.name} project={p} />
+            <ProjectCard key={p.name} project={p} showBadge={false} />
           ))}
         </div>
       </section>
