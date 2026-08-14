@@ -4,6 +4,7 @@ import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
+import Pointer from "@/components/Pointer";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -53,10 +54,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <span />
           <span />
         </div>
+        <div className="grid-glow" aria-hidden />
         <Nav />
         {children}
         <Footer />
         <Reveal />
+        <Pointer />
       </body>
     </html>
   );

@@ -24,6 +24,13 @@
   --amber: #e0af68;
   --purple: #bb9af7;
   --cyan: #7dcfff;
+
+  /* 光标广播位（由 Pointer 组件写入）。这里的初值是没动过
+     鼠标时的落点，让光栅一进页面就在一个好看的位置 */
+  --gx: 50vw;
+  --gy: 35vh;
+  --px: 0;
+  --py: 0;
 }
 
 @theme inline {
@@ -89,6 +96,10 @@ body {
   display: block;
   border-radius: 50%;
   will-change: transform;
+  /* translate 与 keyframes 里的 transform 是两个属性，按
+     translate → transform 的顺序叠加，互不覆盖。
+     每帧重设目标值 + 这条过渡 = 带阻尼的跟随 */
+  transition: translate 0.7s cubic-bezier(0.3, 0, 0.2, 1);
 }
 
 .aurora span:nth-child(1) {
@@ -101,6 +112,8 @@ body {
     rgba(122, 162, 247, 0.15),
     transparent 66%
   );
+  /* 三团用不同的视差系数和方向，跟着光标错开走出纵深 */
+  translate: calc(var(--px) * -2.8vw) calc(var(--py) * -2.8vh);
   animation: drift-a 26s ease-in-out infinite alternate;
 }
 
@@ -114,6 +127,7 @@ body {
     rgba(187, 154, 247, 0.12),
     transparent 64%
   );
+  translate: calc(var(--px) * 2vw) calc(var(--py) * 2vh);
   animation: drift-b 34s ease-in-out infinite alternate;
 }
 
@@ -127,7 +141,55 @@ body {
     rgba(125, 207, 255, 0.1),
     transparent 64%
   );
+  translate: calc(var(--px) * -3.6vw) calc(var(--py) * -3.6vh);
   animation: drift-c 30s ease-in-out infinite alternate;
+}
+
+/* ————————————————————————————————
+   光标光栅 / Pointer grid
+   一张铺满视口的冷色网格，只有光标周围那一圈被
+   遮罩放行——手电筒照亮 HUD 的感觉。
+   遮罩位置直接吃 --gx/--gy，不加过渡：rAF 已经
+   把更新压到每帧一次，再加阻尼只会让网格拖影
+——————————————————————————————— */
+.grid-glow {
+  position: fixed;
+  inset: 0;
+  z-index: -9;
+  display: none;
+  pointer-events: none;
+  background-image:
+    radial-gradient(
+      220px circle at var(--gx) var(--gy),
+      rgba(125, 207, 255, 0.075),
+      transparent 70%
+    ),
+    linear-gradient(rgba(122, 162, 247, 0.4) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(122, 162, 247, 0.4) 1px, transparent 1px);
+  background-size:
+    auto,
+    46px 46px,
+    46px 46px;
+  -webkit-mask-image: radial-gradient(
+    240px circle at var(--gx) var(--gy),
+    #000 0%,
+    rgba(0, 0, 0, 0.38) 48%,
+    transparent 72%
+  );
+  mask-image: radial-gradient(
+    240px circle at var(--gx) var(--gy),
+    #000 0%,
+    rgba(0, 0, 0, 0.38) 48%,
+    transparent 72%
+  );
+}
+
+/* 只在有精确指针的设备上出现：触屏没有光标，
+   一团不会动的网格反而像渲染错误 */
+@media (hover: hover) {
+  .grid-glow {
+    display: block;
+  }
 }
 
 @keyframes drift-a {
@@ -460,6 +522,11 @@ main {
   /* :nth-child(n) 是为了压过上面 :nth-child(1..3) 的特异度 */
   .aurora span:nth-child(n) {
     animation: none;
+    translate: none;
+    transition: none;
+  }
+  .grid-glow {
+    display: none;
   }
   [data-reveal]:not(.in) {
     opacity: 1;
