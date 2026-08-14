@@ -14,8 +14,9 @@ export default function Terminal() {
   return (
     <div
       aria-label="一个 AI Agent 流水线的会话演示"
-      className="overflow-hidden rounded-xl border border-terminal-edge bg-terminal font-mono text-[0.8rem] leading-7 text-terminal-text shadow-[0_24px_70px_-24px_rgba(122,162,247,0.35)]"
+      className="relative overflow-hidden rounded-xl border border-terminal-edge bg-terminal font-mono text-[0.8rem] leading-7 text-terminal-text shadow-[0_24px_70px_-24px_rgba(122,162,247,0.35)]"
     >
+      <span aria-hidden className="term-scan" />
       <div className="flex items-center gap-1.5 border-b border-terminal-edge px-4 py-2.5">
         <span className="h-2.5 w-2.5 rounded-full bg-terminal-edge" />
         <span className="h-2.5 w-2.5 rounded-full bg-terminal-edge" />

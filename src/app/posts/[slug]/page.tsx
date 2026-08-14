@@ -55,8 +55,14 @@ export default async function PostPage({ params }: PageProps<"/posts/[slug]">) {
         dangerouslySetInnerHTML={{ __html: post.html }}
       />
       <p className="mt-14 border-t border-hairline pt-6 font-mono text-xs text-ink-faint">
-        <Link href="/posts/" className="transition-colors hover:text-accent">
-          ← 返回文章列表
+        <Link
+          href="/posts/"
+          className="group inline-flex items-center gap-1.5 transition-colors hover:text-accent"
+        >
+          <span className="inline-block transition-transform duration-300 ease-out group-hover:-translate-x-1">
+            ←
+          </span>
+          返回文章列表
         </Link>
       </p>
     </main>

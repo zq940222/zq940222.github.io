@@ -28,9 +28,12 @@ function SectionHead({
       {href && (
         <Link
           href={href}
-          className="font-mono text-xs text-ink-soft transition-colors hover:text-accent"
+          className="group font-mono text-xs text-ink-soft transition-colors hover:text-accent"
         >
-          {linkText} →
+          {linkText}{" "}
+          <span className="inline-block transition-transform duration-300 ease-out group-hover:translate-x-1">
+            →
+          </span>
         </Link>
       )}
     </div>
@@ -53,7 +56,7 @@ export default function Home() {
           <h1 className="mt-5 font-display text-4xl font-bold leading-[1.15] tracking-tight sm:text-[2.75rem]">
             把 AI Agent 变成
             <br />
-            <span className="bg-gradient-to-r from-accent via-cyan to-purple bg-clip-text text-transparent">
+            <span className="flow-text bg-gradient-to-r from-accent via-cyan to-purple bg-clip-text text-transparent">
               真正能交付
             </span>
             的工具
@@ -69,13 +72,13 @@ export default function Home() {
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <Link
               href="/posts/"
-              className="rounded-md bg-accent px-5 py-2.5 text-sm font-medium text-paper shadow-[0_8px_28px_-10px_rgba(122,162,247,0.55)] transition-colors hover:bg-accent-ink"
+              className="shine rounded-md bg-accent px-5 py-2.5 text-sm font-medium text-paper shadow-[0_8px_28px_-10px_rgba(122,162,247,0.55)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-accent-ink hover:shadow-[0_14px_36px_-10px_rgba(122,162,247,0.7)]"
             >
               读文章
             </Link>
             <Link
               href="/projects/"
-              className="rounded-md border border-hairline px-5 py-2.5 text-sm text-ink transition-colors hover:border-accent hover:text-accent-ink"
+              className="rounded-md border border-hairline px-5 py-2.5 text-sm text-ink transition-all duration-200 hover:-translate-y-0.5 hover:border-accent hover:text-accent-ink"
             >
               看项目
             </Link>
@@ -94,21 +97,36 @@ export default function Home() {
 
       {/* Recent posts */}
       <section className="border-t border-hairline py-12">
-        <SectionHead zh="最近文章" en="RECENT POSTS" href="/posts/" linkText="全部文章" />
+        <div data-reveal>
+          <SectionHead
+            zh="最近文章"
+            en="RECENT POSTS"
+            href="/posts/"
+            linkText="全部文章"
+          />
+        </div>
         <PostList posts={posts} />
       </section>
 
       {/* Featured projects */}
       <section className="border-t border-hairline py-12">
-        <SectionHead
-          zh="精选项目"
-          en="FEATURED PROJECTS"
-          href="/projects/"
-          linkText="全部项目"
-        />
+        <div data-reveal>
+          <SectionHead
+            zh="精选项目"
+            en="FEATURED PROJECTS"
+            href="/projects/"
+            linkText="全部项目"
+          />
+        </div>
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
-          {featured.map((p) => (
-            <ProjectCard key={p.name} project={p} showBadge={false} />
+          {featured.map((p, i) => (
+            <ProjectCard
+              key={p.name}
+              project={p}
+              index={i}
+              reveal
+              showBadge={false}
+            />
           ))}
         </div>
       </section>

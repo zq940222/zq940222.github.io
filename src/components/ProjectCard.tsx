@@ -1,25 +1,51 @@
-import type { CSSProperties } from "react";
+"use client";
+
+import { useRef, type CSSProperties, type PointerEvent } from "react";
 import { categories, type Project } from "@/lib/site";
 
 export default function ProjectCard({
   project,
   index = 0,
   animate = false,
+  reveal = false,
   showBadge = true,
 }: {
   project: Project;
   index?: number;
+  /** 立即播放入场级联（筛选换挡后重放） */
   animate?: boolean;
+  /** 滚动到视口内才入场（首页折叠线以下用这个） */
+  reveal?: boolean;
   showBadge?: boolean;
 }) {
   const cat = categories[project.category];
+  const frame = useRef(0);
+
+  // 把光标位置写进 --mx/--my，聚光的绘制交给 CSS（见 .spot）
+  const trackPointer = (e: PointerEvent<HTMLAnchorElement>) => {
+    if (e.pointerType !== "mouse" || frame.current) return;
+    const el = e.currentTarget;
+    const rect = el.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    frame.current = requestAnimationFrame(() => {
+      frame.current = 0;
+      el.style.setProperty("--mx", `${x}px`);
+      el.style.setProperty("--my", `${y}px`);
+    });
+  };
+
   return (
     <a
       href={project.repo}
       target="_blank"
       rel="noopener noreferrer"
-      style={animate ? ({ "--i": index } as CSSProperties) : undefined}
-      className={`group relative flex cursor-pointer flex-col overflow-hidden rounded-xl border border-hairline bg-paper-raised p-5 transition-all duration-200 ease-out hover:-translate-y-1 hover:border-accent/60 hover:shadow-[0_18px_44px_-16px_rgba(122,162,247,0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper ${
+      onPointerMove={trackPointer}
+      data-reveal={reveal ? "" : undefined}
+      style={
+        animate || reveal ? ({ "--i": index } as CSSProperties) : undefined
+      }
+      className={`spot group relative isolate flex cursor-pointer flex-col overflow-hidden rounded-xl border border-hairline bg-paper-raised p-5 transition-all duration-200 ease-out hover:-translate-y-1 hover:border-accent/60 hover:shadow-[0_18px_44px_-16px_rgba(122,162,247,0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper ${
         animate ? "card-in" : ""
       }`}
     >

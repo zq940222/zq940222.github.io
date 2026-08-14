@@ -9,10 +9,17 @@ const links = [
 
 export default function Nav() {
   return (
-    <header className="border-b border-hairline bg-paper/90 backdrop-blur sticky top-0 z-10">
+    <header className="relative border-b border-hairline bg-paper/90 backdrop-blur sticky top-0 z-10">
+      {/* 阅读进度：贴在导航底边，随文档滚动铺满 */}
+      <span
+        aria-hidden
+        className="scroll-line absolute inset-x-0 -bottom-px h-0.5 bg-gradient-to-r from-accent via-cyan to-purple"
+      />
       <nav className="mx-auto flex max-w-5xl items-baseline justify-between px-5 py-4 sm:px-8">
         <Link href="/" className="group flex items-baseline gap-2.5">
-          <span className="font-mono text-sm text-accent">~/</span>
+          <span className="font-mono text-sm text-accent transition-transform duration-300 group-hover:-translate-y-px">
+            ~/
+          </span>
           <span className="font-display text-lg font-semibold tracking-tight">
             {site.nameZh}
           </span>
@@ -25,7 +32,7 @@ export default function Nav() {
             <Link
               key={l.href}
               href={l.href}
-              className="group text-sm text-ink-soft transition-colors hover:text-ink"
+              className="sweep group text-sm text-ink-soft transition-colors hover:text-ink"
             >
               {l.zh}
               <span className="ml-1 hidden font-mono text-[0.65rem] text-ink-faint group-hover:text-accent sm:inline">

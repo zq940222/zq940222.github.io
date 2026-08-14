@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { CSSProperties } from "react";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -56,15 +57,23 @@ export default function AboutPage() {
         </p>
       </div>
 
-      <h2 className="mt-12 border-t border-hairline pt-8 font-display text-xl font-semibold tracking-tight">
+      <h2
+        data-reveal
+        className="mt-12 border-t border-hairline pt-8 font-display text-xl font-semibold tracking-tight"
+      >
         技术栈
         <span className="ml-2.5 font-mono text-xs font-normal text-ink-faint">
           TECH STACK
         </span>
       </h2>
       <dl className="mt-6 space-y-4">
-        {stack.map((s) => (
-          <div key={s.group} className="grid gap-1 sm:grid-cols-[10rem_1fr]">
+        {stack.map((s, i) => (
+          <div
+            key={s.group}
+            data-reveal
+            style={{ "--i": i } as CSSProperties}
+            className="grid gap-1 sm:grid-cols-[10rem_1fr]"
+          >
             <dt className="font-mono text-xs uppercase tracking-wider text-ink-faint sm:pt-1">
               {s.group}
             </dt>
@@ -72,7 +81,7 @@ export default function AboutPage() {
               {s.items.map((item) => (
                 <span
                   key={item}
-                  className="rounded border border-hairline bg-paper-raised px-2 py-0.5 font-mono text-xs text-ink-soft"
+                  className="rounded border border-hairline bg-paper-raised px-2 py-0.5 font-mono text-xs text-ink-soft transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-accent/60 hover:text-accent-ink"
                 >
                   {item}
                 </span>
@@ -82,13 +91,16 @@ export default function AboutPage() {
         ))}
       </dl>
 
-      <h2 className="mt-12 border-t border-hairline pt-8 font-display text-xl font-semibold tracking-tight">
+      <h2
+        data-reveal
+        className="mt-12 border-t border-hairline pt-8 font-display text-xl font-semibold tracking-tight"
+      >
         联系我
         <span className="ml-2.5 font-mono text-xs font-normal text-ink-faint">
           CONTACT
         </span>
       </h2>
-      <p className="mt-5 leading-loose text-ink-soft">
+      <p data-reveal className="mt-5 leading-loose text-ink-soft">
         邮件是最可靠的方式：
         <a
           href={`mailto:${site.email}`}
