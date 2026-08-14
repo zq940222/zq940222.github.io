@@ -662,6 +662,11 @@ main {
   color: var(--ink-soft);
 }
 
+/* 引用块内部的分段间距——.prose > * + * 只作用于直接子元素 */
+.prose blockquote > * + * {
+  margin-top: 0.9em;
+}
+
 .prose code {
   font-family: var(--font-mono);
   font-size: 0.86em;
