@@ -1,8 +1,16 @@
 import Link from "next/link";
+import Lottie from "@/components/Lottie";
+import { SignalLostStill } from "@/components/LottieStill";
 
 export default function NotFound() {
   return (
     <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col items-start justify-center px-5 py-20 sm:px-8">
+      <Lottie
+        name="signal-lost"
+        label="一段信号波形走到中途断开"
+        className="-ml-2 mb-4 aspect-[4/1] w-full max-w-md"
+        fallback={<SignalLostStill />}
+      />
       <p className="font-mono text-xs tracking-widest text-accent">404</p>
       <h1 className="mt-4 font-display text-3xl font-bold tracking-tight">
         这一页不存在

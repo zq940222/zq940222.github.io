@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import type { CSSProperties } from "react";
+import Lottie from "@/components/Lottie";
+import { PipelineStill } from "@/components/LottieStill";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -56,6 +58,15 @@ export default function AboutPage() {
           agents into tools that actually ship.
         </p>
       </div>
+
+      {/* 正文里那句「把 Agent 编排成生产流水线」的图解：
+          5 个节点依次点亮，对应首页 Terminal 的 5 个阶段 */}
+      <Lottie
+        name="pipeline"
+        label="五个流水线节点依次点亮，数据沿线流过"
+        className="mt-10 aspect-[15/2] w-full"
+        fallback={<PipelineStill />}
+      />
 
       <h2
         data-reveal
